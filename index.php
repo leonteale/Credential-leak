@@ -91,7 +91,7 @@
     <th>Description</th>
   </tr>
   <?php
-    $dir = 'wildcard';
+    $dir = '../wildcard';
     $files = scandir($dir);
     foreach($files as $file) {
       if($file !== '.' && $file !== '..') {
