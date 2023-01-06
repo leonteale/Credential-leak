@@ -79,7 +79,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Credential Leak</h1>
+    <h1>Credential-Leak</h1>
     <form method="post">
       Email address: <input type="text" name="email"><br>
       <input type="submit" value="Submit">
