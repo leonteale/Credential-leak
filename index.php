@@ -1,9 +1,11 @@
+<!-- HTML document with a black background, green text, and a Bootstrap CSS file linked from a CDN -->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- CSS styles to apply to the body, container, headings, table, form, and input elements -->
   <style>
     body {
       background-color: black;
@@ -78,12 +80,18 @@
   </style>
 </head>
 <body>
+  <!-- Container element with a white background and rounded corners -->
   <div class="container">
-    <h1>Credential-Leak</h1>
-    <form method="post">
-      Email address: <input type="text" name="email"><br>
-      <input type="submit" value="Submit">
-    </form> 
+<!-- Page heading -->
+<h1>Credential-Leak</h1>
+
+<!-- Form with an input field for an email address and a submit button -->
+<form method="post">
+  Email address: <input type="text" name="email"><br>
+  <input type="submit" value="Submit">
+</form> 
+
+<!-- Table with a caption, headings, and table rows for each file in the '../wildcard' directory -->
 <table>
   <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
   <tr>
@@ -91,21 +99,21 @@
     <th>Description</th>
   </tr>
   
-<?php
+  <!-- PHP script that checks for processes running for '/home/leon/.local/bin/h8mail' and prints a message accordingly -->
+  <?php
+    $command = "ps aux | grep '/home/leon/.local/bin/h8mail' | grep -v grep";
+    $output = shell_exec($command);
 
-$command = "ps aux | grep '/home/leon/.local/bin/h8mail' | grep -v grep";
-$output = shell_exec($command);
+    if (trim($output) != "") {
+        preg_match('/-t ([^\s]+)/', $output, $matches);
+        $domain = $matches[1];
+        echo "Search currently in progress for $domain";
+    } else {
+        echo "Program free to search";
+    }
+  ?>
 
-if (trim($output) != "") {
-    preg_match('/-t ([^\s]+)/', $output, $matches);
-    $domain = $matches[1];
-    echo "Search currently in progress for $domain";
-} else {
-    echo "Program free to search";
-}
-
-?>
-
+  <!-- PHP script that generates a table row for each file in the '../wildcard' directory -->
   <?php
     $dir = '../wildcard';
     $files = scandir($dir);
@@ -113,58 +121,16 @@ if (trim($output) != "") {
       if($file !== '.' && $file !== '..') {
         // generate a table row for each file
         echo '<tr>';
-        echo '<td><a href="/leak/wildcard/' . $file . '">' . $file . '</a></td>';
-        echo '<td>A listing of all emails associated with this domain</td>';
+        echo '<td><a href="../wildcard/' . $file . '">' . $file . '</a></td>';
+        echo '<td>' . file_get_contents($dir . '/' . $file) . '</td>';
         echo '</tr>';
       }
     }
   ?>
 </table>
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Get the email address from the form submission
-  $email = $_POST['email'];
 
-  // Validate the email address using a regular expression
-  $pattern = '/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,6}$/';
-  if (preg_match($pattern, $email)) {
-    // Escape special characters in the email address
-    $escaped_email = escapeshellarg($email);
-
-    // Build the h8mail command using the escaped email address
-    $command = "/Wordlists/COMB/CompilationOfManyBreaches/query.sh $escaped_email";
-
-    // Escape special characters in the command to prevent command injection
-    $escaped_command = escapeshellcmd($command);
-
-    // Run the h8mail command
-    $output = shell_exec($escaped_command);
-
-    // Save the email address to a text file
-    file_put_contents('/var/www/html/leak/emails.txt', $escaped_email . PHP_EOL, FILE_APPEND);
-
-    // Output the result of the h8mail command in a table format
-    echo '<table>';
-    echo '<tr>';
-    echo '<th>Email Address</th>';
-    echo '<th>Password</th>';
-    echo '</tr>';
-    $lines = explode("\n", $output);
-    foreach ($lines as $line) {
-      $columns = explode(":", $line);
-      echo '<tr>';
-      echo '<td>' . $columns[0] . '</td>';
-      echo '<td>' . $columns[1] . '</td>';
-      echo '</tr>';
-    }
-    echo '</table>';
-  } else {
-    // Input is not a valid email address
-    echo '<p class="error">Error: Please enter a valid email address.</p>';
-  }
-}
-?>
-
+<!-- Footer with a link to a GitHub repository -->
+<p><a href="https://github.com/Leon-nn/Credential-Leak">GitHub</a></p>
   </div>
 </body>
 </html>
