@@ -90,6 +90,19 @@
     <th>Link</th>
     <th>Description</th>
   </tr>
+  
+  <?php
+
+$command = "ps aux | grep '/home/leon/.local/bin/h8mail' | grep -v grep";
+$output = shell_exec($command);
+
+if (trim($output) != "") {
+    echo "Search currently running";
+} else {
+    echo "Program free to search";
+}
+
+?>
   <?php
     $dir = '../wildcard';
     $files = scandir($dir);
