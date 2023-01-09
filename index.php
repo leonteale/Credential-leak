@@ -111,11 +111,11 @@ if (trim($output) != "") {
   $files = scandir($dir);
   foreach($files as $file) {
     if($file !== '.' && $file !== '..') {
-      // Use a regular expression to search for and replace the '[0m' pattern in the file name
-      $file = preg_replace('/\x1B\[0m/', '', $file);
+      // Remove the '.txt' extension from the file name
+      $link = str_replace('.txt', '', $file);
       // Generate a table row for each file
       echo '<tr>';
-      echo '<td><a href="/leak/wildcard/' . $file . '">' . $file . '</a></td>';
+      echo '<td><a href="/leak/wildcard/' . $file . '">' . $link . '</a></td>';
       echo '<td>A listing of all emails associated with this domain</td>';
       echo '</tr>';
     }
