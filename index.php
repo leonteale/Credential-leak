@@ -163,7 +163,7 @@ function filterTable() {
 
   
   
-</table>
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the email address from the form submission
