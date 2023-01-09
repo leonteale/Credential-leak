@@ -107,6 +107,7 @@ if (trim($output) != "") {
 ?>
 
 
+
 <!-- Add a search input field and a search button to the table -->
 <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for domains..">
 <button onclick="filterTable()">Search</button>
@@ -119,14 +120,19 @@ if (trim($output) != "") {
     <th>Description</th>
   </tr>
   <?php
-    $dir = '../wildcard';
+    // Escape special characters in the '../wildcard' directory path to prevent command injection attacks
+    $dir = escapeshellarg('../wildcard');
     $files = scandir($dir);
     foreach($files as $file) {
       if($file !== '.' && $file !== '..') {
-        // generate a table row for each file
+        // Encode special characters in the file name to prevent XSS attacks
+        $file = htmlspecialchars($file);
+        // Generate a table row for each file
         echo '<tr>';
         echo '<td><a href="/leak/wildcard/' . $file . '">' . $file . '</a></td>';
-        echo '<td>A listing of all emails associated with this domain</td>';
+        // Remove HTML and PHP tags from the file contents to prevent XSS attacks
+        $description = strip_tags(file_get_contents($dir . '/' . $file));
+        echo '<td>' . $description . '</td>';
         echo '</tr>';
       }
     }
@@ -160,6 +166,10 @@ function filterTable() {
   }
 }
 </script>
+
+
+
+
 
   
   
