@@ -106,74 +106,21 @@ if (trim($output) != "") {
 
 ?>
 
-
-
-<!-- Add a search input field and a search button to the table -->
-<input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for domains..">
-<button onclick="filterTable()">Search</button>
-
-<!-- Table with a caption, headings, and table rows for each file in the '../wildcard' directory -->
-<table id="table">
-  <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
-  <tr>
-    <th>Link</th>
-    <th>Description</th>
-  </tr>
   <?php
-    // Escape special characters in the '../wildcard' directory path to prevent command injection attacks
-    $dir = escapeshellarg('../wildcard');
+    $dir = '../wildcard';
     $files = scandir($dir);
     foreach($files as $file) {
       if($file !== '.' && $file !== '..') {
-        // Encode special characters in the file name to prevent XSS attacks
-        $file = htmlspecialchars($file);
-        // Generate a table row for each file
+        // generate a table row for each file
         echo '<tr>';
         echo '<td><a href="/leak/wildcard/' . $file . '">' . $file . '</a></td>';
-        // Remove HTML and PHP tags from the file contents to prevent XSS attacks
-        $description = strip_tags(file_get_contents($dir . '/' . $file));
-        echo '<td>' . $description . '</td>';
+        echo '<td>A listing of all emails associated with this domain</td>';
         echo '</tr>';
       }
     }
   ?>
+  
 </table>
-
-<!-- Add a JavaScript function to filter the table rows based on the search query -->
-<script>
-function filterTable() {
-  // Get the search query
-  var input = document.getElementById("searchInput");
-  var filter = input.value.toLowerCase();
-
-  // Get the table
-  var table = document.getElementById("table");
-
-  // Get the table rows
-  var tr = table.getElementsByTagName("tr");
-
-  // Loop through the table rows and hide those that don't match the search query
-  for (var i = 0; i < tr.length; i++) {
-    var td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      var text = td.textContent || td.innerText;
-      if (text.toLowerCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-
-
-
-
-
-  
-  
-
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the email address from the form submission
