@@ -101,7 +101,7 @@ if (trim($output) != "") {
     $domain = $matches[1];
     echo "Search currently in progress for $domain";
 } else {
-    echo "Program free for wildcar search";
+    echo "Program free for wildcard search. Search <a href="">here</a>";
 }
 
 ?>
