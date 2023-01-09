@@ -106,6 +106,18 @@ if (trim($output) != "") {
 
 ?>
 
+
+<!-- Add a search input field and a search button to the table -->
+<input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for domains..">
+<button onclick="filterTable()">Search</button>
+
+<!-- Table with a caption, headings, and table rows for each file in the '../wildcard' directory -->
+<table id="table">
+  <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
+  <tr>
+    <th>Link</th>
+    <th>Description</th>
+  </tr>
   <?php
     $dir = '../wildcard';
     $files = scandir($dir);
@@ -119,6 +131,38 @@ if (trim($output) != "") {
       }
     }
   ?>
+</table>
+
+<!-- Add a JavaScript function to filter the table rows based on the search query -->
+<script>
+function filterTable() {
+  // Get the search query
+  var input = document.getElementById("searchInput");
+  var filter = input.value.toLowerCase();
+
+  // Get the table
+  var table = document.getElementById("table");
+
+  // Get the table rows
+  var tr = table.getElementsByTagName("tr");
+
+  // Loop through the table rows and hide those that don't match the search query
+  for (var i = 0; i < tr.length; i++) {
+    var td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      var text = td.textContent || td.innerText;
+      if (text.toLowerCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
+  
+  
 </table>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
