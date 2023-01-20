@@ -84,12 +84,15 @@
       Email address: <input type="text" name="email"><br>
       <input type="submit" value="Submit">
     </form> 
+	
+<!-- this will submit the wildcard search -->
 	<div id="domainSearch" style="display:none;">
   <form method="post">
     Domain: <input type="text" id="domainInput" name="domain"><br>
     <input type="button" value="Submit" onclick="submitDomain()">
   </form>
-</div>
+  </div>
+
 <table>
   <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
   <tr>
@@ -97,6 +100,7 @@
     <th>Description</th>
   </tr>
  
+<!-- this will show and hide the wildcardsearch form -->
  <script>
   function toggleSearch() {
     var searchBox = document.getElementById("domainSearch");
