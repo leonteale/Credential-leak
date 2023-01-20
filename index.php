@@ -12,9 +12,7 @@
  
 	<!-- This will show and hide the wildcardsearch form -->
 	<?php include 'wild-card-form-show-hide.php';?>
-	
-	<!--Create a user session-->
-	<?php include 'create-session.php';?>
+
 
 </head>
 
