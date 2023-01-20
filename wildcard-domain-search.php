@@ -1,5 +1,4 @@
 <?php
-session_start();
 $_SESSION['form_data'] = $_POST;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

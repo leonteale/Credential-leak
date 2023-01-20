@@ -13,7 +13,7 @@
 	<!-- This will show and hide the wildcardsearch form -->
 	<?php include 'wild-card-form-show-hide.php';?>
 
-
+<?php session_start();?>
 </head>
 
 <body>

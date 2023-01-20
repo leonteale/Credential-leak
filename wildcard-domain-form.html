@@ -9,7 +9,7 @@
  -->
 
 <?php 
- session_start();
+
 if(isset($_SESSION['form_data'])){
     $form_data = $_SESSION['form_data'];
     echo 'Domain: ' . $form_data['domain'];
