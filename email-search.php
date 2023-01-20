@@ -37,9 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       echo '</tr>';
     }
     echo '</table>';
-  } else {
-    // Input is not a valid email address
-    echo '<p class="error">Error: Please enter a valid email address.</p>';
-  }
+  } 
 }
 ?>
