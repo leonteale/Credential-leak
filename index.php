@@ -95,6 +95,8 @@
 </head>
 
 <body>
+
+<!-- this is the form for email search -->
   <div class="container">
     <h1>Credential-Leak</h1>
     <form method="post">
@@ -102,11 +104,11 @@
       <input type="submit" value="Submit">
     </form> 
 	
-<!-- this will submit the wildcard search -->
+<!-- this is the form for wildcard domain search -->
 	<div id="domainSearch" style="display:none;">
   <form method="post">
     Wildcard domain (NOT CURRENTLY WORKING): <input type="text" id="domainInput" name="domain"><br>
-    <input type="submit" value="Submit" onclick="submitDomain()">
+    <input type="submit" value="Submit">
   </form>
   </div>
 
@@ -117,7 +119,7 @@
     <th>Description</th>
   </tr>
  
- <!-- This is the PHP to process the submitted data for EMAIL -->
+ <!-- This is the PHP to check if there is an active wildcard search or not -->
 <?php
 
 $command = "ps aux | grep '/home/leon/.local/bin/h8mail' | grep -v grep";
@@ -133,6 +135,7 @@ if (trim($output) != "") {
 
 ?>
 
+<!--This searches for any previous wildcard search results and lists them in the table-->
 <?php
   $dir = '../wildcard';
   $files = scandir($dir);
@@ -148,9 +151,9 @@ if (trim($output) != "") {
     }
   }
 ?>
-
-  
 </table>
+
+
  <!-- This is the PHP to process the submitted data for EMAIL -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -196,19 +199,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 ?>
-<!-- This function will sanitize the input to prevent command injection and XSS and execute the commands -->
-<?php
-if (isset($_POST['domain'])) {
-    $domain = $_POST['domain'];
-    // Sanitize the input
-    $domain = preg_replace('/[^a-zA-Z0-9.-]/', '', $domain);
-    // Run the command in the background
-    $command = "/home/leon/.local/bin/h8mail -t " . $domain . " -sk -lb /Wordlists/COMB/CompilationOfManyBreaches/ --loose > /tmp/" . $domain . " &";
-	echo 'wildcard search initiated';
-}
-?>
 
- <!-- This is the PHP to process the submitted data for EMAIL -->
+
+ <!-- This is the PHP to process the submitted data for DOMAIN -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the email address from the form submission
