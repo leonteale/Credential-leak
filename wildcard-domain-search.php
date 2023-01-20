@@ -12,8 +12,8 @@ if(isset($_SESSION['session_id']) && $_SESSION['session_id'] == $_POST['session_
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the domain from the form submission
   $domain = $_POST['domain'];
-// Build the h8mail command using the escaped email address
-    $command = "ls";
+// Build the h8mail command using the escaped domain
+    $command = "echo $domain";
 	$escaped_command = escapeshellcmd($command);
 	$output = shell_exec($escaped_command);
   echo "<pre>$output</pre>";
