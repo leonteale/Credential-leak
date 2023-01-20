@@ -28,7 +28,7 @@
     <h1>Credential-Leak</h1>
 
 <!-- this is the form for email search -->
-	<include src="./email-forms.html"></include>
+	<include src="./email-form.html"></include>
 	
 <!-- this is the form for wildcard domain search -->
 	<div id="domainSearch" style="display:none;">
