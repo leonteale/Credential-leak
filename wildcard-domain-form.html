@@ -8,14 +8,6 @@
   </div>
  -->
 
-<?php 
-
-if(isset($_SESSION['form_data'])){
-    $form_data = $_SESSION['form_data'];
-    echo 'Domain: ' . $form_data['domain'];
-}
-?>
-
 <div id="domainSearch" style="display:none;">
   <form method="post" action="wildcard-domain-search.php">
     Wildcard domain (NOT CURRENTLY WORKING): <input type="text" id="domainInput" name="domain"><br>
