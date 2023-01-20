@@ -84,13 +84,30 @@
       Email address: <input type="text" name="email"><br>
       <input type="submit" value="Submit">
     </form> 
+	<div id="domainSearch" style="display:none;">
+  <form method="post">
+    Domain: <input type="text" id="domainInput" name="domain"><br>
+    <input type="button" value="Submit" onclick="submitDomain()">
+  </form>
+</div>
 <table>
   <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
   <tr>
     <th>Link</th>
     <th>Description</th>
   </tr>
-  
+ 
+ <script>
+  function toggleSearch() {
+    var searchBox = document.getElementById("domainSearch");
+    if (searchBox.style.display === "none") {
+      searchBox.style.display = "block";
+    } else {
+      searchBox.style.display = "none";
+    }
+  }
+</script>
+
 <?php
 
 $command = "ps aux | grep '/home/leon/.local/bin/h8mail' | grep -v grep";
@@ -101,7 +118,7 @@ if (trim($output) != "") {
     $domain = $matches[1];
     echo "Search currently in progress for $domain";
 } else {
-    echo "Program free for wildcard search. Search <a href=''>here</a>";
+    echo "Program free for wildcard search. Search <a href='javascript:void(0);' onclick='toggleSearch()'>here</a>";
 }
 
 ?>
