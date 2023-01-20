@@ -1,6 +1,16 @@
-	<div id="domainSearch" style="display:none;">
+<!--	<div id="domainSearch" style="display:none;">
   <form method="post">
     Wildcard domain (NOT CURRENTLY WORKING): <input type="text" id="domainInput" name="domain"><br>
     <input type="submit" value="Submit">
   </form>
   </div>
+ -->
+  
+  
+  <?php
+if(isset($_POST['domain'])) {
+  $domain = $_POST['domain'];
+  $output = exec("dig $domain");
+  echo "<pre>$output</pre>";
+}
+?>
