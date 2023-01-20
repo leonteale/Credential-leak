@@ -12,6 +12,9 @@
  
 	<!-- This will show and hide the wildcardsearch form -->
 	<?php include 'wild-card-form-show-hide.php';?>
+	
+<!--This javascript will make sure only the correct form is submitted-->
+<?php include 'formid-javascript.php';?>
 
 </head>
 
