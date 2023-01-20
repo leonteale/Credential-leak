@@ -88,7 +88,7 @@
 <!-- this will submit the wildcard search -->
 	<div id="domainSearch" style="display:none;">
   <form method="post">
-    Domain: <input type="text" id="domainInput" name="domain"><br>
+    Wildcard domain: <input type="text" id="domainInput" name="domain"><br>
     <input type="submit" value="Submit" onclick="submitDomain()">
   </form>
   </div>
