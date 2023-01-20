@@ -1,7 +1,6 @@
 <?php
 
 //This is the session handling bit
-session_start();
 if(isset($_SESSION['session_id']) && $_SESSION['session_id'] == $_POST['session_id']){
     // process form data
     unset($_SESSION['session_id']);
