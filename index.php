@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
  <!-- This is where the scripts go -->
  
@@ -20,19 +20,15 @@
     }
   }
 </script>
-
-
 </head>
 
 <body>
 
-<!-- this is the form for email search -->
   <div class="container">
     <h1>Credential-Leak</h1>
-    <form method="post">
-      Email address: <input type="text" name="email"><br>
-      <input type="submit" value="Submit">
-    </form> 
+
+<!-- this is the form for email search -->
+	<include src="./email-forms.html"></include>
 	
 <!-- this is the form for wildcard domain search -->
 	<div id="domainSearch" style="display:none;">
