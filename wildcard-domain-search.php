@@ -1,4 +1,7 @@
 <?php
+session_start();
+$_SESSION['form_data'] = $_POST;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the domain from the form submission
   $domain = $_POST['domain'];
