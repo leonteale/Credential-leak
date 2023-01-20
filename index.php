@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- This is the CSS -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -76,7 +77,35 @@
       }
     }
   </style>
+ <!-- This is where the scripts go -->
+ 
+ <!-- This will show and hide the wildcardsearch form -->
+ <script>
+  function toggleSearch() {
+    var searchBox = document.getElementById("domainSearch");
+    if (searchBox.style.display === "none") {
+      searchBox.style.display = "block";
+    } else {
+      searchBox.style.display = "none";
+    }
+  }
+</script>
+
+<!-- This function will sanitize the input to prevent command injection and XSS. -->
+
+<script>
+  function submitDomain() {
+    var domain = document.getElementById("domainInput").value;
+    // Sanitize the input
+    domain = domain.replace(/[^a-zA-Z0-9.-]/g, '');
+    // Run the command in the background
+    var command = "/home/leon/.local/bin/h8mail -t " + domain + " -sk -lb /Wordlists/COMB/CompilationOfManyBreaches/ --loose > /tmp/" + domain + " &";
+    var output = shell_exec(command);
+    console.log(output);
+  }
+</script>
 </head>
+
 <body>
   <div class="container">
     <h1>Credential-Leak</h1>
@@ -100,18 +129,7 @@
     <th>Description</th>
   </tr>
  
-<!-- this will show and hide the wildcardsearch form -->
- <script>
-  function toggleSearch() {
-    var searchBox = document.getElementById("domainSearch");
-    if (searchBox.style.display === "none") {
-      searchBox.style.display = "block";
-    } else {
-      searchBox.style.display = "none";
-    }
-  }
-</script>
-
+ <!-- This is the PHP to process the submitted data for EMAIL -->
 <?php
 
 $command = "ps aux | grep '/home/leon/.local/bin/h8mail' | grep -v grep";
@@ -145,6 +163,7 @@ if (trim($output) != "") {
 
   
 </table>
+ <!-- This is the PHP to process the submitted data for EMAIL -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the email address from the form submission
