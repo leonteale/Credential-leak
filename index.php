@@ -10,17 +10,9 @@
 
  <!-- This is where the scripts go -->
  
- <!-- This will show and hide the wildcardsearch form -->
- <script>
-  function toggleSearch() {
-    var searchBox = document.getElementById("domainSearch");
-    if (searchBox.style.display === "none") {
-      searchBox.style.display = "block";
-    } else {
-      searchBox.style.display = "none";
-    }
-  }
-</script>
+	<!-- This will show and hide the wildcardsearch form -->
+	<?php include 'wild-card-form-show-hide.php';?>
+
 </head>
 
 <body>
