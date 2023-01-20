@@ -20,7 +20,7 @@
 
 <body>
   <div class="container">
-    <h1>Credential-Leak-test</h1>
+    <h1>Credential-Leak-performing updates please check back</h1>
 
 		<!-- this is the form for email search -->
 		<?php include 'email-form.html';?>
