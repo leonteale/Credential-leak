@@ -91,19 +91,7 @@
   }
 </script>
 
-<!-- This function will sanitize the input to prevent command injection and XSS. -->
 
-<script>
-  function submitDomain() {
-    var domain = document.getElementById("domainInput").value;
-    // Sanitize the input
-    domain = domain.replace(/[^a-zA-Z0-9.-]/g, '');
-    // Run the command in the background
-    var command = "/home/leon/.local/bin/h8mail -t " + domain + " -sk -lb /Wordlists/COMB/CompilationOfManyBreaches/ --loose > /tmp/" + domain + " &";
-    var output = shell_exec(command);
-    console.log(output);
-  }
-</script>
 </head>
 
 <body>
@@ -164,6 +152,73 @@ if (trim($output) != "") {
   
 </table>
  <!-- This is the PHP to process the submitted data for EMAIL -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Get the email address from the form submission
+  $email = $_POST['email'];
+
+  // Validate the email address using a regular expression
+  $pattern = '/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,6}$/';
+  if (preg_match($pattern, $email)) {
+    // Escape special characters in the email address
+    $escaped_email = escapeshellarg($email);
+
+    // Build the h8mail command using the escaped email address
+    $command = "/Wordlists/COMB/CompilationOfManyBreaches/query.sh $escaped_email";
+
+    // Escape special characters in the command to prevent command injection
+    $escaped_command = escapeshellcmd($command);
+
+    // Run the h8mail command
+    $output = shell_exec($escaped_command);
+
+    // Save the email address to a text file
+    file_put_contents('/var/www/html/leak/emails.txt', $escaped_email . PHP_EOL, FILE_APPEND);
+
+    // Output the result of the h8mail command in a table format
+    echo '<table>';
+    echo '<tr>';
+    echo '<th>Email Address</th>';
+    echo '<th>Password</th>';
+    echo '</tr>';
+    $lines = explode("\n", $output);
+    foreach ($lines as $line) {
+      $columns = explode(":", $line);
+      echo '<tr>';
+      echo '<td>' . $columns[0] . '</td>';
+      echo '<td>' . $columns[1] . '</td>';
+      echo '</tr>';
+    }
+    echo '</table>';
+  } else {
+    // Input is not a valid email address
+    echo '<p class="error">Error: Please enter a valid email address.</p>';
+  }
+}
+?>
+<!-- This function will sanitize the input to prevent command injection and XSS and execute the commands -->
+<?php
+if (isset($_POST['domain'])) {
+    $domain = $_POST['domain'];
+    // Sanitize the input
+    $domain = preg_replace('/[^a-zA-Z0-9.-]/', '', $domain);
+    // Run the command in the background
+    $command = "/home/leon/.local/bin/h8mail -t " . $domain . " -sk -lb /Wordlists/COMB/CompilationOfManyBreaches/ --loose > /tmp/" . $domain . " &";
+	echo 'wildcard search initiated';
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+<!-- This is the PHP to process the submitted data for Domain -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Get the email address from the form submission
