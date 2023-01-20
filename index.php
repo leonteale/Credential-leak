@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
   <div class="container">
     <h1>Credential-Leak</h1>
 
@@ -32,12 +31,8 @@
 	<?php include 'email-form.html';?>
 	
 <!-- this is the form for wildcard domain search -->
-	<div id="domainSearch" style="display:none;">
-  <form method="post">
-    Wildcard domain (NOT CURRENTLY WORKING): <input type="text" id="domainInput" name="domain"><br>
-    <input type="submit" value="Submit">
-  </form>
-  </div>
+<?php include 'wildcard-domain-form.html';?>
+
 
 <table>
   <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
