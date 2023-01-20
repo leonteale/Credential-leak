@@ -33,35 +33,11 @@
 <!-- this is the form for wildcard domain search -->
 <?php include 'wildcard-domain-form.html';?>
 
-
-<table>
-  <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
-  <tr>
-    <th>Link</th>
-    <th>Description</th>
-  </tr>
- 
  <!-- This is the PHP to check if there is an active wildcard search or not -->
 	<?php include 'check-wildcard-process.php';?>
 
-
-<!--This searches for any previous wildcard search results and lists them in the table-->
-<?php
-  $dir = '../wildcard';
-  $files = scandir($dir);
-  foreach($files as $file) {
-    if($file !== '.' && $file !== '..') {
-      // Remove the '.txt' extension from the file name
-      $link = str_replace('.txt', '', $file);
-      // Generate a table row for each file
-      echo '<tr>';
-      echo '<td><a href="/leak/wildcard/' . $file . '">' . $link . '</a></td>';
-      echo '<td>A listing of all emails associated with this domain</td>';
-      echo '</tr>';
-    }
-  }
-?>
-</table>
+<!-- this is the table with quick links for previous wildcard searches -->
+<?php include 'wildcard-table-quick-links.html';?>
 
 
  <!-- This is the PHP to process the submitted data for EMAIL -->
