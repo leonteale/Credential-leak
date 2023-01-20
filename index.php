@@ -93,13 +93,25 @@
       console.log(output);
     }
   </script>
+  <script>
+  function submitEmail() {
+    var email = document.getElementById("emailInput").value;
+    // Sanitize the input
+    email = email.replace(/[^a-zA-Z0-9@.-]/g, '');
+    // Use the email address to retrieve the results
+    // Example: 
+    // var results = retrieveResults(email);
+    //console.log(results);
+  }
+</script>
 </head>
 <body>
   <div class="container">
     <h1>Credential-Leak</h1>
     <form method="post">
-      Email address: <input type="text" name="email"><br>
-      <input type="submit" value="Submit">
+      Email address: <input type="text" id="emailInput" name="email">
+<br>
+      <input type="submit" value="Submit" onclick="submitEmail()">
     </form> 
     <table>
       <caption>Quick Links - These are pre-searched wildcards on their respective domains</caption>
