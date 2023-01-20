@@ -1,7 +1,11 @@
-  <?php
-if(isset($_POST['domain'])) {
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Get the domain from the form submission
   $domain = $_POST['domain'];
-  $output = exec("dig $domain");
+// Build the h8mail command using the escaped email address
+    $command = "ls";
+	$escaped_command = escapeshellcmd($command);
+	$output = shell_exec($escaped_command);
   echo "<pre>$output</pre>";
 }
 ?>
