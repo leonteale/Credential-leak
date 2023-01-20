@@ -89,7 +89,7 @@
 	<div id="domainSearch" style="display:none;">
   <form method="post">
     Domain: <input type="text" id="domainInput" name="domain"><br>
-    <input type="button" value="Submit" onclick="submitDomain()">
+    <input type="submit" value="Submit" onclick="submitDomain()">
   </form>
   </div>
 
